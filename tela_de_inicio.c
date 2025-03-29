@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 int tela_de_inicio () {
     
     char acesso = '0';
