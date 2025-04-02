@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-int tela_inicio_professor() {
+int menu_iniciar() {
     char opcao_menu_inicial;
     
-    printf("Bem-vindo ao menu inicial!!!\n\n");
+    printf("\n\nBem-vindo ao menu inicial!!!\n\n");
 
     printf("*Digite 1 para buscar estudantes cadastrados\n");
     printf("*Digite 2 para cadastrar estudantes\n");
