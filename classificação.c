@@ -3,7 +3,7 @@
 int main()
 {
 
-char usuario_aluno
+char usuario_aluno[40];
 float media;
 
  if (media >= 6){
