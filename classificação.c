@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main()
+int classificacao()
 {
 
 char usuario_aluno[40];
