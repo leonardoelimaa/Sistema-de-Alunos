@@ -11,7 +11,7 @@ int menu_iniciar() {
     printf("*Digite 4 para incluir observacoes dos estudantes\n");
     printf("*Digite 5 para gerar relatorios de desempenho da turma\n\n");
 
-    scanf("%c", &opcao_menu_inicial);
+    scanf(" %c", &opcao_menu_inicial);
 
     switch (opcao_menu_inicial) {
         case '1': 
