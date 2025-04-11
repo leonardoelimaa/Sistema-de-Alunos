@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(){
+int relatorio(){
 
 char usuario_professor[40], nome_aluno[100][100];
 int quant_de_provas, quant_de_alunos, i;
