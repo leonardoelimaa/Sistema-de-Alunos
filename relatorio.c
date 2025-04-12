@@ -21,7 +21,7 @@ scanf("%f", &n3[i]);
 media[i] = (n1[i] + n2[i] + n3[i]) / 3;
 }
 
-printf("\n----------Relatório para o professor %s----------\n", usuario_professor);
+printf("\n----------Relatório de Desempenho----------\n", usuario_professor);
 printf("\nNome do aluno\t Nota 1\t Nota 2\t Nota 3\t Média\t Aprovação\n");
 
 for(i=0; i < quant_de_alunos; i++){
