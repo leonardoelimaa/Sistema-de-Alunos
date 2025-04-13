@@ -5,11 +5,12 @@ int menu_iniciar() {
     
     printf("\n\nBem-vindo ao menu inicial!!!\n\n");
 
-    printf("*Digite 1 para buscar estudantes cadastrados\n");
-    printf("*Digite 2 para cadastrar estudantes\n");
-    printf("*Digite 3 para cadastrar notas dos estudantes\n");
-    printf("*Digite 4 para incluir observacoes dos estudantes\n");
-    printf("*Digite 5 para gerar relatorios de desempenho da turma\n\n");
+    printf("*Digite 1 para buscar estudantes cadastrados.\n");
+    printf("*Digite 2 para cadastrar estudantes.\n");
+    printf("*Digite 3 para cadastrar notas dos estudantes.\n");
+    printf("*Digite 4 para incluir observacoes dos estudantes.\n");
+    printf("*Digite 5 para gerar relatorios de desempenho da turma.\n");
+    printf("*Digite 6 para sair do sistema.\n\n");
 
     scanf(" %c", &opcao_menu_inicial);
 
@@ -28,6 +29,9 @@ int menu_iniciar() {
             break;
         case '5': 
             return 5; // Na main, permite gerar relatorios de estudantes.
+            break;
+        case '6': 
+            return 6; // Na main, Sai do sistema.
             break;
     }
 }
