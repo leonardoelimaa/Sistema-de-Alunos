@@ -51,5 +51,7 @@ int main () {
         case 5:           
             printf("Opcao de relatorios ainda nao criado!");
             break;
+        case 6:           
+            return 0;
     }  
 }
