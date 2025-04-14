@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-
-int tela_de_inicio();
-int login_professor();
-int login_professor();
-int menu_iniciar();
+#include "sistema.h"
 
 
 int main () {
