@@ -5,7 +5,6 @@
 // obs: A struct será definida em outra parte do projeto, essa é apenas para testes
 
 struct provas {
-
     float p1;
     float p2;
     float p3;

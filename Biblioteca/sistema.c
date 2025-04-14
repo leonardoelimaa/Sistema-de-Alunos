@@ -98,15 +98,10 @@ int menu_iniciar() {
 
 
 struct provas {
-
     float p1;
-
     float p2;
-
     float p3;
-
     float media;
-
 };
 
 void media(struct provas aluno) {
@@ -127,7 +122,7 @@ void media(struct provas aluno) {
         quant_de_provas = 3;                               //foram realizadas 3 provas
 
 
-    }else if (aluno.p2 < 0) {      // checando se a p2 foi realizada, se nao tiver sido realizada, automaticamente a p3 tambem nao foi
+    } else if (aluno.p2 < 0) {      // checando se a p2 foi realizada, se nao tiver sido realizada, automaticamente a p3 tambem nao foi
 
         aluno.media = aluno.p1;  // a media do aluno sera apenas a nota da primeira prova
         quant_de_provas = 1;    // apenas uma prova foi realizada, a p1  
@@ -141,7 +136,7 @@ void media(struct provas aluno) {
     }
 
     //checando quantas provas foram feitas para exibir as medias
-    switch(quant_de_provas) {
+    switch (quant_de_provas) {
 
         case 3: 
 
@@ -173,7 +168,7 @@ void media(struct provas aluno) {
 
     }
 };
-
+// Fim
 
 int classificacao() {
     char usuario_aluno[40];
