@@ -4,7 +4,7 @@
 int tela_de_inicio();
 int login_professor();
 int menu_iniciar();
-void media(struct provas aluno);
+void media(int i);
 int classificacao();
 void cadastrarAluno();
 void listarAlunos();
