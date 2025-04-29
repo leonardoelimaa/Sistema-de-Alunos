@@ -2,7 +2,7 @@
 
 int relatorio() {
 
-	char usuario_professor[40], nome_aluno[100][NUMERO_ALUNOS];
+	char usuario_professor[40], nome_aluno[MAX_NOME][NUMERO_ALUNOS];
 	int NUMERO_ALUNOS, i;
 	float media[NUMERO_ALUNOS], n1[NUMERO_ALUNOS], n2[NUMERO_ALUNOS], n3[NUMERO_ALUNOS];
 
