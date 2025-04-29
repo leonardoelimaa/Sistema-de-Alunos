@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define MAX_ALUNOS 100
 #define MAX_NOME 100
@@ -13,11 +15,48 @@ typedef struct {
     char observacoes[MAX_OBS];
 } Aluno;
 
-Aluno alunos[MAX_ALUNOS]; // Criacao de um vetor de structs
+Aluno alunos[MAX_ALUNOS]; // Criação de um vetor de structs
 int totalAlunos = 0;
 
 void limparBuffer() {
     while (getchar() != '\n');
+}
+
+// Função para verificar se a matrícula já existe
+int matriculaExiste(int matricula) {
+    for (int i = 0; i < totalAlunos; i++) {
+        if (alunos[i].matricula == matricula) {
+            return 1; // Verdadeiro - matrícula existe
+        }
+    }
+    return 0; // Falso - matrícula não existe
+}
+
+// Função para gerar matrícula automática (ano atual + 5 dígitos aleatórios)
+int gerarMatricula() {
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    int ano = tm.tm_year + 1900;
+    int matricula;
+    int tentativas = 0;
+    
+    do {
+        // Gera 5 dígitos aleatórios
+        int randomDigits = rand() % 90000 + 10000; // Garante que terá 5 dígitos
+        
+        // Combina ano com dígitos aleatórios (ex: 202312345)
+        matricula = ano * 100000 + randomDigits;
+        
+        tentativas++;
+        
+        // Previne loop infinito caso (improvável) de muitas colisões
+        if (tentativas > 100) {
+            printf("Erro: Não foi possível gerar uma matrícula única após 100 tentativas.\n");
+            return -1;
+        }
+    } while (matriculaExiste(matricula)); // Continua até achar uma matrícula única
+    
+    return matricula;
 }
 
 void cadastrarAluno() {
@@ -34,17 +73,13 @@ void cadastrarAluno() {
     fgets(novoAluno.nome, MAX_NOME, stdin);
     novoAluno.nome[strcspn(novoAluno.nome, "\n")] = '\0';
     
-    printf("Numero de matricula: ");
-    scanf("%d", &novoAluno.matricula);
-    limparBuffer();
-    
-    // Verificar se tem matricula repetida
-    for (int i = 0; i < totalAlunos; i++) {
-        if (alunos[i].matricula == novoAluno.matricula) {
-            printf("Erro: Matricula ja existe!\n");
-            return;
-        }
+    // Gera matrícula automaticamente
+    novoAluno.matricula = gerarMatricula();
+    if (novoAluno.matricula == -1) {
+        printf("Erro ao gerar matrícula. Cadastro cancelado.\n");
+        return;
     }
+    printf("Numero de matricula gerado automaticamente: %d\n", novoAluno.matricula);
     
     printf("Curso: ");
     fgets(novoAluno.curso, MAX_CURSO, stdin);
@@ -182,13 +217,26 @@ void removerAluno() {
     
     printf("Removendo aluno: %s\n", alunos[pos].nome);
     
-    // sobe os alunos uma posicao quando algum e excluido
+    // Move os alunos uma posição para frente quando algum é excluído
     for (int i = pos; i < totalAlunos - 1; i++) {
         alunos[i] = alunos[i + 1];
     }
     
     totalAlunos--;
     printf("Aluno removido com sucesso!\n");
+}
+
+// Função para perguntar se deseja voltar ao menu
+void voltarAoMenu() {
+    printf("\nDeseja voltar ao menu principal? (1 - Sim / 0 - Nao): ");
+    int opcao;
+    scanf("%d", &opcao);
+    limparBuffer();
+    
+    if (opcao == 0) {
+        printf("Saindo do sistema...\n");
+        exit(0);
+    }
 }
 
 void menu() {
@@ -203,6 +251,9 @@ void menu() {
 }
 
 int main() {
+    // Inicializa o gerador de números aleatórios
+    srand(time(NULL));
+    
     int opcao;
     
     do {
@@ -213,24 +264,30 @@ int main() {
         switch(opcao) {
             case 1:
                 cadastrarAluno();
+                voltarAoMenu();
                 break;
             case 2:
                 listarAlunos();
+                voltarAoMenu();
                 break;
             case 3:
                 buscarAluno();
+                voltarAoMenu();
                 break;
             case 4:
                 editarAluno();
+                voltarAoMenu();
                 break;
             case 5:
                 removerAluno();
+                voltarAoMenu();
                 break;
             case 0:
                 printf("Saindo do sistema...\n");
                 break;
             default:
                 printf("Opcao invalida!\n");
+                voltarAoMenu();
         }
     } while (opcao != 0);
     
