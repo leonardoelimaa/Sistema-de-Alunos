@@ -1,0 +1,15 @@
+	NOVA VERSÃO DE 3/05/2025 - 14:46
+
+
+- Criação do branch para testes: pedro_tests 
+- Inclusão de novas bibliotecas em sistema.c: stdlib e time
+- Adição de novas constantes em sistema.c: MAX_NOTAS
+- Adição de um novo campo ao tipo struct Aluno:  notas[MAX_NOTAS]
+- Adição de novas funções em sistema.c: int matriculaExiste(int matricula), int gerarMatricula(), void voltarAoMenu()
+  void cadastro_notas()
+- Adição de comentários nas funções
+- Atualização das funções para suas versões mais recentes
+- Atualização das referências em sistema.h 
+- Inclusão de return 0; nas funções tela_de_inicio() e menu iniciar() em sistema.c
+- Alteração da função classificacao() de int para void
+- inclusão de um arquivo Makefile para fazer a compilação do código de forma automática

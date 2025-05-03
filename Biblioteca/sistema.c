@@ -1,9 +1,37 @@
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include "sistema.h"
+//definindo bibliotecas
+#include <stdio.h>         //biblioteca padrão de entrada e saída
+#include <stdlib.h>       //biblioteca de funções de uso comum
+#include <string.h>      //biblioteca de strings
+#include <ctype.h>      //biblioteca para manipular caracteres
+#include <time.h>      //biblioteca para usar funções relacionadas ao tempo
+#include "sistema.h"  //cabeçalho da biblioteca do projeto
 
+//definindo constantes
+#define MAX_ALUNOS 100   //constante do número de alunos
+#define MAX_NOME 100    //constante do número máximo de caracteres de um nome
+#define MAX_CURSO 50   //constante do número máximo de caracteres do nome do curso
+#define MAX_OBS 200   //costante que define o tamanho máximo das observações
+#define MAX_NOTAS 3  //constante que define o número de notas a serem cadastradas(experimental)
 
+//definindo o tipo estrutura que irá armazenar as informação dos alunos
+typedef struct {
+    char  nome[MAX_NOME];
+    int   matricula;
+    char  curso[MAX_CURSO];
+    char  observacoes[MAX_OBS];
+    float p1;
+    float p2;
+    float p3;
+    float media;
+    float notas[MAX_NOTAS]; //experimental
+} Aluno;
+
+//definindo um array de structs chamado "alunos", com base no tipo de estrutura "Aluno"
+Aluno alunos[MAX_ALUNOS];
+
+int totalAlunos = 0; //número inicial de alunos
+
+//defindo uma matriz multidimensional que armazena as credenciais dos professores
 char acessos_professor_cadastrados [5][2][30] = {
     {"leonardolima", "senhaleonardo"},
     {"pedrobrito", "senhapedro"},
@@ -14,13 +42,14 @@ char acessos_professor_cadastrados [5][2][30] = {
 char usuario_professor[30];
 char senha_professor[30];
 
+//função responsável pela tela de início do programa 
 int tela_de_inicio() {
     
     char acesso = '0';
 
     printf ("\n----- Bem-vindo ao EduC, a maior plataforma de gestao de alunos do Brasil! -----\n\n");
     
-    while (acesso != '1' && acesso != '2' && acesso != '3') {
+    while (acesso != '1' && acesso != '2' && acesso != '3') {   //o loop se repete até que algum dos comandos básicos seja digitado pelo usuário
         printf("Para acessar nosso sistema: \n\n");
         printf("*Digite 1 para conectar-se como aluno\n");
         printf("*Digite 2 para conectar-se como professor\n");
@@ -29,31 +58,36 @@ int tela_de_inicio() {
         scanf(" %c", &acesso);
 
         if (acesso == '1') {
-            return 1; // Na main, o retorno 1 ira direcionar para o aluno
+            return 1;                     // Na main, o retorno 1 ira direcionar para o aluno
         } else if (acesso == '2') {
-            return 2; // Na main, o retorno 2 ira direcionar para o professor
+            return 2;                   // Na main, o retorno 2 ira direcionar para o professor
         } else if (acesso == '3'){
-            return 3; // Na main, o retorno 3 vai fazer a main retornar 0 e sair do programa
+            return 3;                 // Na main, o retorno 3 vai fazer a main retornar 0 e sair do programa
         } else {
             printf("\nCaractere digitado invalido! Selecione um caracter valido a seguir: \n\n");
         }
     }
+
+    return 0; //para o compilador não reclamar da falta de um retorno padrão, mas não é usado
 }
 
-
+//função que solicita e verifica o login do professor
 int login_professor () {
+
     printf("\nVoce escolheu a opcao de acesso como professor!\n");
     printf("Para conectar-se ao sistema, insira seu nome de usuario e senha, respectivamente, a seguir:\n\n");
 
     while(1) {
-        char tentativa_login[2][30];
+
+        char tentativa_login[2][30];    //essa variável será usada para testar se as entradas batem com os professores cadastrados
 
         printf("Nome de usuario: "); scanf("%s", tentativa_login[0]);
         printf("Senha: "); scanf("%s", tentativa_login[1]);
 
-        
+        //essa operação identifica o números de professores cadastrados
         int numero_de_usuarios = sizeof(acessos_professor_cadastrados) / sizeof(acessos_professor_cadastrados[0]);
 
+        //checa um por um se a tentativa de login bate com algum professor cadastrado
         for (int i = 0; i < numero_de_usuarios; i++) {
             if (strcmp(tentativa_login[0], acessos_professor_cadastrados[i][0]) == 0 && 
                 strcmp(tentativa_login[1], acessos_professor_cadastrados[i][1]) == 0) {
@@ -64,7 +98,7 @@ int login_professor () {
     }
 }
 
-
+//função de menu inicial para o professor
 int menu_iniciar() {
     char opcao_menu_inicial;
     
@@ -94,11 +128,11 @@ int menu_iniciar() {
         case '5': 
             return 5; // Na main, permite gerar relatorios de estudantes.
     }
+
+    return 0; //para o compilador não reclamar da ausencia de um retorno padrao
 }
 
-
-// definindo a função que irá calcular a média e exibir as notas e as médias
-
+//função que irá calcular a média e exibir as notas e as médias
 void media(int i) {
 
     /* -- A variável quant_de_provas vai contar a quantidade de provas que já foram aplicadas até o momento
@@ -182,43 +216,63 @@ void media(int i) {
 
     }
 }
-// Fim
 
-int classificacao() {
+//função de classificação (incompleta)
+void classificacao() {
     char usuario_aluno[40];
-    float media;
+    float media = 0;
 
     if (media >= 6) {
         printf("O aluno %s, com %.2f de média, foi aprovado!", usuario_aluno, media);
     } else {
         printf("O aluno %s, com %.2f de média, foi reprovado.", usuario_aluno, media);
     }
+
 }
 
-
-#define MAX_ALUNOS 100
-#define MAX_NOME 100
-#define MAX_CURSO 50
-#define MAX_OBS 200
-
-typedef struct {
-    char nome[MAX_NOME];
-    int matricula;
-    char curso[MAX_CURSO];
-    char observacoes[MAX_OBS];
-    float p1;
-    float p2;
-    float p3;
-    float media;
-} Aluno;
-
-Aluno alunos[MAX_ALUNOS];
-int totalAlunos = 0;
-
+//funçaõ que remove o \n, caracter que pode cabar sendo armazenado e lido de forma errônea por outros trecho do código
 void limparBuffer() {
     while (getchar() != '\n');
 }
 
+// Função para verificar se a matrícula gerada já existe (é usada em gerarMatricula();)
+int matriculaExiste(int matricula) {
+    for (int i = 0; i < totalAlunos; i++) {
+        if (alunos[i].matricula == matricula) {
+            return 1; // Verdadeiro - matrícula existe
+        }
+    }
+    return 0; // Falso - matrícula não existe
+}
+
+// Função para gerar matrícula automática (ano atual + 5 dígitos aleatórios)
+int gerarMatricula() {
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    int ano = tm.tm_year + 1900;
+    int matricula;
+    int tentativas = 0;
+    
+    do {
+        // Gera 5 dígitos aleatórios
+        int randomDigits = rand() % 90000 + 10000; // Garante que terá 5 dígitos
+        
+        // Combina ano com dígitos aleatórios (ex: 202312345)
+        matricula = ano * 100000 + randomDigits;
+        
+        tentativas++;
+        
+        // Previne loop infinito caso (improvável) de muitas colisões
+        if (tentativas > 100) {
+            printf("Erro: Não foi possível gerar uma matrícula única após 100 tentativas.\n");
+            return -1;
+        }
+    } while (matriculaExiste(matricula)); // Continua até achar uma matrícula única
+    
+    return matricula;
+}
+
+//função que irá cadastrar o aluno
 void cadastrarAluno() {
     if (totalAlunos >= MAX_ALUNOS) {
         printf("Limite de alunos atingido!\n");
@@ -233,17 +287,13 @@ void cadastrarAluno() {
     fgets(novoAluno.nome, MAX_NOME, stdin);
     novoAluno.nome[strcspn(novoAluno.nome, "\n")] = '\0';
     
-    printf("Numero de matricula: ");
-    scanf("%d", &novoAluno.matricula);
-    limparBuffer();
-    
-    // Verificar se tem matricula repetida
-    for (int i = 0; i < totalAlunos; i++) {
-        if (alunos[i].matricula == novoAluno.matricula) {
-            printf("Erro: Matricula ja existe!\n");
-            return;
-        }
+    // Gera matrícula automaticamente
+    novoAluno.matricula = gerarMatricula();
+    if (novoAluno.matricula == -1) {
+        printf("Erro ao gerar matrícula. Cadastro cancelado.\n");
+        return;
     }
+    printf("Numero de matricula gerado automaticamente: %d\n", novoAluno.matricula);
     
     printf("Curso: ");
     fgets(novoAluno.curso, MAX_CURSO, stdin);
@@ -259,6 +309,7 @@ void cadastrarAluno() {
     printf("Aluno cadastrado com sucesso!\n");
 }
 
+//função que lista todos os alunos
 void listarAlunos() {
     if (totalAlunos == 0) {
         printf("Nenhum aluno cadastrado.\n");
@@ -275,6 +326,7 @@ void listarAlunos() {
     }
 }
 
+//função que busca por meio da matrícula
 int buscarPorMatricula(int matricula) {
     for (int i = 0; i < totalAlunos; i++) {
         if (alunos[i].matricula == matricula) {
@@ -284,6 +336,7 @@ int buscarPorMatricula(int matricula) {
     return -1;
 }
 
+//função de busca completa, por matrícula e por nome
 void buscarAluno() {
     int opcao;
     printf("\n--- Buscar Aluno ---\n");
@@ -337,6 +390,7 @@ void buscarAluno() {
     }
 }
 
+//função que edita os dados dos alunos depois de já criados
 void editarAluno() {
     int matricula;
     printf("\n--- Editar Aluno ---\n");
@@ -366,6 +420,7 @@ void editarAluno() {
     printf("Aluno atualizado com sucesso!\n");
 }
 
+//função que remove o registro de um aluno
 void removerAluno() {
     int matricula;
     printf("\n--- Remover Aluno ---\n");
@@ -390,6 +445,7 @@ void removerAluno() {
     printf("Aluno removido com sucesso!\n");
 }
 
+//função de menu
 void menu() {
     printf("\n=== SISTEMA DE GESTAO DE ALUNOS ===\n");
     printf("1. Cadastrar aluno\n");
@@ -397,6 +453,79 @@ void menu() {
     printf("3. Buscar aluno\n");
     printf("4. Editar aluno\n");
     printf("5. Remover aluno\n");
+    printf("6. Cadastro de notas\n");
     printf("0. Sair\n");
     printf("Escolha uma opcao: ");
 }
+
+//função para perguntar se deseja voltar ao menu
+void voltarAoMenu() {
+    printf("\nDeseja voltar ao menu principal? (1 - Sim / 0 - Nao): ");
+    int opcao;
+    scanf("%d", &opcao);
+    limparBuffer();
+    
+    if (opcao == 0) {
+        printf("Saindo do sistema...\n");
+        exit(0);
+    }
+}
+
+//função que cadastra as notas
+void cadastro_notas()
+{
+    int opcao;
+    printf("\n--- Cadastro de notas ---\n");
+    printf("1. Cadastrar notas\n");
+    printf("2. Ver notas cadastradas\n");
+    printf("0. Voltar\n");
+    scanf("%d", &opcao);
+    limparBuffer();
+
+    if(opcao == 1)
+    {
+        int matricula;
+        printf("Escreva a matricula do aluno que voce ira registrar a nota.\n");
+        scanf("%d", &matricula);
+        limparBuffer();
+
+        int pos = buscarPorMatricula(matricula);
+        if (pos == -1) {
+            printf("Aluno nao encontrado.\n");
+        } else {
+            printf("\nAluno encontrado: %s\n", alunos[pos].nome);
+            
+            for(int i = 0; i < 3; i++)
+            {
+                printf("Digite a nota %d.\n", (i + 1));
+                scanf("%f", &alunos[pos].notas[i]);
+                limparBuffer();
+            }
+            }
+    }
+
+    if(opcao == 2)
+    {
+        int matricula;
+        printf("Escreva a matricula do aluno que voce quer ver as notas.\n");
+        scanf("%d", &matricula);
+        limparBuffer();
+
+        int pos = buscarPorMatricula(matricula);
+        if (pos == -1) {
+            printf("Aluno nao encontrado.\n");
+        } else {
+            printf("\nAluno encontrado: %s\n", alunos[pos].nome);
+
+            printf("\n--- Notas do aluno ---\n");
+            printf("Prova 1: %.2f\n", alunos[pos].notas[0]);
+            printf("Prova 2: %.2f\n", alunos[pos].notas[1]);
+            printf("Prova 3: %.2f\n\n", alunos[pos].notas[2]);
+        }
+    }
+
+    if(opcao == 0)
+        voltarAoMenu();
+
+}
+
