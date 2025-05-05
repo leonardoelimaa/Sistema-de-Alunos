@@ -4,6 +4,8 @@
 #include "sistema.h"
 
 
+// Variaveis, vetores e structs utilizados:
+
 char acessos_professor_cadastrados [5][2][30] = {
     {"leonardolima", "senhaleonardo"},
     {"pedrobrito", "senhapedro"},
@@ -13,6 +15,10 @@ char acessos_professor_cadastrados [5][2][30] = {
 };
 char usuario_professor[30];
 char senha_professor[30];
+
+
+
+// Funcoes: 
 
 int tela_de_inicio() {
     
@@ -40,7 +46,6 @@ int tela_de_inicio() {
     }
 }
 
-
 int login_professor () {
     printf("\nVoce escolheu a opcao de acesso como professor!\n");
     printf("Para conectar-se ao sistema, insira seu nome de usuario e senha, respectivamente, a seguir:\n\n");
@@ -63,7 +68,6 @@ int login_professor () {
         printf("Nome de usuario/Senha invalidos! Tente novamente!!! \n\n");
     }
 }
-
 
 int menu_iniciar() {
     char opcao_menu_inicial;
@@ -96,10 +100,8 @@ int menu_iniciar() {
     }
 }
 
-
-// definindo a função que irá calcular a média e exibir as notas e as médias
-
 void media(int i) {
+    // definindo a função que irá calcular a média e exibir as notas e as médias
 
     /* -- A variável quant_de_provas vai contar a quantidade de provas que já foram aplicadas até o momento
        -- Se uma prova ainda não foi aplicada, o professor deve atribuir uma nota negativa à variável p(1, 2 ou 3)
@@ -117,12 +119,12 @@ void media(int i) {
         alunos[i].media = (alunos[i].p1 + alunos[i].p2 + alunos[i].p3) / 3; //se todas já foram aplicadas calcula a média
         quant_de_provas = 3;                                               //foram aplicadas as 3 provas
 
-    }else if (alunos[i].p1 < 0) {       //checando se a p1 foi aplicada, se não foi então o professor ainda não aplicou nenhuma prova
+    } else if (alunos[i].p1 < 0) {       //checando se a p1 foi aplicada, se não foi então o professor ainda não aplicou nenhuma prova
 
         alunos[i].media = -1;         //definindo a média com um valor arbitrário de -1, mas ela não será exibida
         quant_de_provas =  0;
 
-    }else if (alunos[i].p2 < 0) {          // checando se a p2 foi aplicada, se não tiver sido aplicada, automaticamente a p3 também não foi
+    } else if (alunos[i].p2 < 0) {          // checando se a p2 foi aplicada, se não tiver sido aplicada, automaticamente a p3 também não foi
     
         alunos[i].media = alunos[i].p1;  // a média do alunos[i] será apenas a nota da primeira prova
         quant_de_provas = 1;            // apenas uma prova foi aplicada, a p1  
@@ -181,8 +183,8 @@ void media(int i) {
         printf("Um erro foi detectado"); 
 
     }
+    // Fim
 }
-// Fim
 
 int classificacao() {
     char usuario_aluno[40];
