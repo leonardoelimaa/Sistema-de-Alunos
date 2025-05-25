@@ -5,7 +5,10 @@ int tela_de_inicio();
 int login_professor();
 int menu_iniciar();
 void media(int i);
-int classificacao();
+void classificacao();
+void limparBuffer();
+int matriculaExiste(int matricula);
+int gerarMatricula();
 void cadastrarAluno();
 void listarAlunos();
 int buscarPorMatricula(int matricula);
@@ -13,5 +16,7 @@ void buscarAluno();
 void editarAluno();
 void removerAluno();
 void menu();
+void voltarAoMenu();
+void cadastro_notas();
 
 #endif
