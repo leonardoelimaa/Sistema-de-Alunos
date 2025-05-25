@@ -1,16 +1,12 @@
 #include <stdio.h>
 
-int classificacao()
-{
-
-char usuario_aluno[40];
-float media;
-
- if (media >= 6){
-printf("O aluno %s, com %.2f de média, foi aprovado!", usuario_aluno, media);
- }
-else{
-printf("O aluno %s, com %.2f de média, foi reprovado.", usuario_aluno, media);
-}
-
+int classificacao() {
+    char usuario_aluno[40];
+    float media;
+    
+    if (media >= 6) {
+        printf("O aluno %s, com %.2f de média, foi aprovado!", usuario_aluno, media);
+    } else {
+        printf("O aluno %s, com %.2f de média, foi reprovado.", usuario_aluno, media);
+    }
 }
