@@ -53,32 +53,28 @@ int tela_de_inicio() {
 
     printf ("\n----- Bem-vindo ao EduC, a maior plataforma de gestao de alunos do Brasil! -----\n\n");
     
-    while (acesso != '1' && acesso != '2' && acesso != '3') {   //o loop se repete até que algum dos comandos básicos seja digitado pelo usuário
+    while (acesso != '1' && acesso != '2') {   //o loop se repete até que algum dos comandos básicos seja digitado pelo usuário
         printf("Para acessar nosso sistema: \n\n");
-        printf("*Digite 1 para conectar-se como aluno\n");
-        printf("*Digite 2 para conectar-se como professor\n");
-        printf("*Digite 3 para sair do sistema\n\n");
+        printf("*Digite 1 para conectar-se ao sistema\n");
+        printf("*Digite 2 para sair do sistema\n\n");
 
         scanf(" %c", &acesso);
 
         if (acesso == '1') {
-            return 1;                     // Na main, o retorno 1 ira direcionar para o aluno
+            return 1;                     // Na main, o retorno 1 ira direcionar para a pagina de login
         } else if (acesso == '2') {
-            return 2;                   // Na main, o retorno 2 ira direcionar para o professor
-        } else if (acesso == '3'){
-            return 3;                 // Na main, o retorno 3 vai fazer a main retornar 0 e sair do programa
+            return 2;                   // Na main, o retorno 2 ira retorna 0, saindo do sistema
         } else {
             printf("\nCaractere digitado invalido! Selecione um caracter valido a seguir: \n\n");
         }
     }
 
-    return 0; //para o compilador não reclamar da falta de um retorno padrão, mas não é usado
+    return 0; // retorno padrão, mas não é usado
 }
 
 //função que solicita e verifica o login do professor
 int login_professor () {
 
-    printf("\nVoce escolheu a opcao de acesso como professor!\n");
     printf("Para conectar-se ao sistema, insira seu nome de usuario e senha, respectivamente, a seguir:\n\n");
 
     while(1) {
@@ -95,45 +91,11 @@ int login_professor () {
         for (int i = 0; i < numero_de_usuarios; i++) {
             if (strcmp(tentativa_login[0], acessos_professor_cadastrados[i][0]) == 0 && 
                 strcmp(tentativa_login[1], acessos_professor_cadastrados[i][1]) == 0) {
-                return 2; // Na main, o retorno de 1 libera o usuario
+                return 1; // Na main, o retorno de 1 libera o usuario
             } 
         } 
         printf("Nome de usuario/Senha invalidos! Tente novamente!!! \n\n");
     }
-}
-
-//função de menu inicial para o professor
-int menu_iniciar() {
-    char opcao_menu_inicial;
-    
-    printf("\n\nBem-vindo ao menu inicial!!!\n\n");
-
-    printf("*Digite 1 para buscar estudantes cadastrados\n");
-    printf("*Digite 2 para cadastrar estudantes\n");
-    printf("*Digite 3 para cadastrar notas dos estudantes\n");
-    printf("*Digite 4 para incluir observacoes dos estudantes\n");
-    printf("*Digite 5 para gerar relatorios de desempenho da turma\n\n");
-
-    scanf(" %c", &opcao_menu_inicial);
-
-    switch (opcao_menu_inicial) {
-        case '1': 
-            return 1; // Na main, permite buscar estudantes.
-            break; 
-        case '2': 
-            return 2; // Na main, permite cadastrar estudantes.
-            break;
-        case '3': 
-            return 3; // Na main, permite cadastrar notas de estudantes.
-            break;
-        case '4': 
-            return 4; // Na main, permite incluir observacoes de estudantes.
-            break;
-        case '5': 
-            return 5; // Na main, permite gerar relatorios de estudantes.
-    }
-
-    return 0; //para o compilador não reclamar da ausencia de um retorno padrao
 }
 
 //função que irá calcular a média e exibir as notas e as médias
