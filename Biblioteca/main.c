@@ -12,41 +12,60 @@ int main () {
 
     switch (retorno_acesso) {
         case 1: 
-            printf("Login aluno, ainda a ser criado!");
-            break;
-        case 2:
             retorno_login = login_professor();
             break;
-        case 3:
+        case 2:
+            printf("Saindo do sistema...");
             return 0;
+            break;
     }
 
-    switch (retorno_login) {
-        case 1:
-            printf("Pagina de aluno ainda nao criada!");
-            break;
-        case 2:           
-            retorno_menu = menu_iniciar();
-            break;
-    }  
+    if (retorno_menu == 1) {
+        // Inicializa o gerador de números aleatórios
+    srand(time(NULL));
+    
+    int opcao;
+    
+    do {
+        menu();
+        scanf("%d", &opcao);
+        limparBuffer();
+        
+        switch(opcao) {
+            case 1:
+                cadastrarAluno();
+                voltarAoMenu();
+                break;
+            case 2:
+                listarAlunos();
+                voltarAoMenu();
+                break;
+            case 3:
+                buscarAluno();
+                voltarAoMenu();
+                break;
+            case 4:
+                editarAluno();
+                voltarAoMenu();
+                break;
+            case 5:
+                removerAluno();
+                voltarAoMenu();
+                break;
+            case 6:
+                cadastro_notas();
+                voltarAoMenu();
+                break;
+            case 0:
+                printf("Saindo do sistema...\n");
+                break;
+            default:
+                printf("Opcao invalida!\n");
+                voltarAoMenu();
+        }
+    } while (opcao != 0);
+    
+    return 0;
+    }
+}  
 
-    switch (retorno_menu) {
-        case 1:
-            printf("Buscar estudantes ainda nao criado");
-            break;
-        case 2:           
-            printf("Cadastro de estudantes ainda nao criado!");
-            break;
-        case 3:           
-            printf("Cadastro de notas ainda nao criado!");
-            break;
-        case 4:           
-            printf("Opcao de observacoes ainda nao criado!");
-            break;
-        case 5:           
-            printf("Opcao de relatorios ainda nao criado!");
-            break;
-        case 6:           
-            return 0;
-    }  
-}
