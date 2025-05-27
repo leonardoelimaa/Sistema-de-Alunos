@@ -98,48 +98,65 @@ int login_professor () {
     }
 }
 
-//função que irá calcular a média e exibir as notas e as médias
-void media(int i) {
-    // definindo a função que irá calcular a média e exibir as notas e as médias
+//função que irá calcular a média
+void calcular_media(int i) {
 
-    /* -- A variável quant_de_provas vai contar a quantidade de provas que já foram aplicadas até o momento
+
+     //calculando a média com base na quantidade de provas que foram aplicadas
+    if (alunos[i].p1 >= 0 && alunos[i].p2 >= 0 && alunos[i].p3 >= 0) {
+
+
+        alunos[i].media = (alunos[i].p1 + alunos[i].p2 + alunos[i].p3) / 3; //se todas já foram aplicadas calcula a média
+
+    }else if (alunos[i].p1 < 0) {       //checando se a p1 foi aplicada, se não foi então o professor ainda não aplicou nenhuma prova
+
+        alunos[i].media = -1;         //definindo a média com um valor arbitrário de -1, mas ela não será exibida
+    
+    }else if (alunos[i].p2 < 0) {          // checando se a p2 foi aplicada, se não tiver sido aplicada, automaticamente a p3 também não foi
+    
+        alunos[i].media = alunos[i].p1;  // a média do alunos[i] será apenas a nota da primeira prova 
+
+    } else {                          // se a p2 foi aplicada então a única não aplicada foi a p3
+
+        alunos[i].media = (alunos[i].p1 + alunos[i].p2) / 2;  // a média será calculada apenas pelas duas primeiras notas
+    }
+
+}
+
+void exibir_notas(int i) {
+
+      /* -- A variável provas_aplicadas vai contar a quantidade de provas que já foram aplicadas até o momento
        -- Se uma prova ainda não foi aplicada, o professor deve atribuir uma nota negativa à variável p(1, 2 ou 3)
        -- Logicamente, se uma prova ainda não foi aplicada, a prova seguinte também não. Um professor não vai aplicar a terceira prova sem antes
     aplicar a segunda
        -- Portanto, p1 = -1, p2 =10, p3 = 4 é um exemplo de sequencia inválida de notas
     */
-    int quant_de_provas = 0;
+
+    int provas_aplicadas = 0;  //OBS: como a quantidade de provas aplicadas é igual para todos os alunos ela pode ser escrita como uma variavel global, se isso for conveniente
 
 
-     //checando se todas as provas já foram aplicadas
+    //realizando a mesma checagem da função 
     if (alunos[i].p1 >= 0 && alunos[i].p2 >= 0 && alunos[i].p3 >= 0) {
 
+        provas_aplicadas = 3;    //foram aplicadas as 3 provas
 
-        alunos[i].media = (alunos[i].p1 + alunos[i].p2 + alunos[i].p3) / 3; //se todas já foram aplicadas calcula a média
-        quant_de_provas = 3;                                               //foram aplicadas as 3 provas
+    }else if (alunos[i].p1 < 0) {       
 
-    } else if (alunos[i].p1 < 0) {       //checando se a p1 foi aplicada, se não foi então o professor ainda não aplicou nenhuma prova
+        provas_aplicadas =  0;   //nenhuma prova foi aplicada 
 
-        alunos[i].media = -1;         //definindo a média com um valor arbitrário de -1, mas ela não será exibida
-        quant_de_provas =  0;
-
-    } else if (alunos[i].p2 < 0) {          // checando se a p2 foi aplicada, se não tiver sido aplicada, automaticamente a p3 também não foi
+    }else if (alunos[i].p2 < 0) {           
     
-        alunos[i].media = alunos[i].p1;  // a média do alunos[i] será apenas a nota da primeira prova
-        quant_de_provas = 1;            // apenas uma prova foi aplicada, a p1  
+        provas_aplicadas = 1;   // apenas uma prova foi aplicada
 
-    } else {                          // se a p2 foi aplicada então a única não aplicada foi a p3
-
-        alunos[i].media = (alunos[i].p1 + alunos[i].p2) / 2;  // a média será calculada apenas pelas duas primeiras notas
-        quant_de_provas = 2;                                 // duas provas foram aplicadas
+    } else {                         
+        provas_aplicadas = 2;   //foram aplicadas 2 provas                             
     }
-
 
     //mensagem ao entrar na página de consulta das notas
     printf("\n\t----- Avaliação do aluno %s -----\n\n", alunos[i].nome); 
 
     //checando quantas provas foram feitas para exibir as médias
-    switch(quant_de_provas) {
+    switch(provas_aplicadas) {
 
         case 3:  //se as três provas foram aplicadas
 
@@ -182,7 +199,7 @@ void media(int i) {
         printf("Um erro foi detectado"); 
 
     }
-    // Fim
+
 }
 
 //função de classificação (incompleta)
