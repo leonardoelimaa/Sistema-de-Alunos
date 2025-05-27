@@ -440,8 +440,7 @@ void voltarAoMenu() {
 }
 
 //função que cadastra as notas
-void cadastro_notas()
-{
+void cadastro_notas() {
     int opcao;
     printf("\n--- Cadastro de notas ---\n");
     printf("1. Cadastrar notas\n");
@@ -450,8 +449,7 @@ void cadastro_notas()
     scanf("%d", &opcao);
     limparBuffer();
 
-    if(opcao == 1)
-    {
+    if (opcao == 1) {
         int matricula;
         printf("Escreva a matricula do aluno que voce ira registrar a nota.\n");
         scanf("%d", &matricula);
@@ -463,17 +461,15 @@ void cadastro_notas()
         } else {
             printf("\nAluno encontrado: %s\n", alunos[pos].nome);
             
-            for(int i = 0; i < 3; i++)
-            {
+            for(int i = 0; i < 3; i++) {
                 printf("Digite a nota %d.\n", (i + 1));
                 scanf("%f", &alunos[pos].notas[i]);
                 limparBuffer();
             }
-            }
+        }
     }
 
-    if(opcao == 2)
-    {
+    if (opcao == 2) {
         int matricula;
         printf("Escreva a matricula do aluno que voce quer ver as notas.\n");
         scanf("%d", &matricula);
@@ -492,8 +488,7 @@ void cadastro_notas()
         }
     }
 
-    if(opcao == 0)
+    if (opcao == 0)
         voltarAoMenu();
 
 }
-
