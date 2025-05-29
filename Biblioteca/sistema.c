@@ -108,11 +108,11 @@ void calcular_media(int i) {
 
         alunos[i].media = (alunos[i].p1 + alunos[i].p2 + alunos[i].p3) / 3; //se todas já foram aplicadas calcula a média
 
-    }else if (alunos[i].p1 < 0) {       //checando se a p1 foi aplicada, se não foi então o professor ainda não aplicou nenhuma prova
+    } else if (alunos[i].p1 < 0) {       //checando se a p1 foi aplicada, se não foi então o professor ainda não aplicou nenhuma prova
 
         alunos[i].media = -1;         //definindo a média com um valor arbitrário de -1, mas ela não será exibida
     
-    }else if (alunos[i].p2 < 0) {          // checando se a p2 foi aplicada, se não tiver sido aplicada, automaticamente a p3 também não foi
+    } else if (alunos[i].p2 < 0) {          // checando se a p2 foi aplicada, se não tiver sido aplicada, automaticamente a p3 também não foi
     
         alunos[i].media = alunos[i].p1;  // a média do alunos[i] será apenas a nota da primeira prova 
 
@@ -478,11 +478,12 @@ void cadastro_notas() {
         } else {
             printf("\nAluno encontrado: %s\n", alunos[pos].nome);
             
-            for(int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++) {
                 printf("Digite a nota %d.\n", (i + 1));
                 scanf("%f", &alunos[pos].notas[i]);
                 limparBuffer();
             }
+            calcular_media(pos);
         }
     }
 
@@ -502,6 +503,7 @@ void cadastro_notas() {
             printf("Prova 1: %.2f\n", alunos[pos].notas[0]);
             printf("Prova 2: %.2f\n", alunos[pos].notas[1]);
             printf("Prova 3: %.2f\n\n", alunos[pos].notas[2]);
+            printf("Media: %.2f\n\n", alunos[pos].media);
         }
     }
 
