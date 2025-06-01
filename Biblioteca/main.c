@@ -7,8 +7,7 @@
 int main () {
     system("cls");
     
-    int retorno_acesso = tela_de_inicio(); // Atualmente retornando 2
-    int retorno_login; // Atualmente retornando 
+    int retorno_acesso = tela_de_inicio(); // Atualmente retornando 2 
     int retorno_menu; 
 
     switch (retorno_acesso) {
