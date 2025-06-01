@@ -13,7 +13,7 @@ int main () {
 
     switch (retorno_acesso) {
         case 1: 
-            retorno_login = login_professor();
+            retorno_menu = login_professor();
             break;
         case 2:
             printf("Saindo do sistema...");
