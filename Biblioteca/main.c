@@ -57,6 +57,10 @@ int main () {
                 cadastro_notas();
                 voltarAoMenu();
                 break;
+            case 7:
+                relatorioBoletim();
+                voltarAoMenu();
+                break;
             case 0:
                 printf("Saindo do sistema...\n");
                 break;
