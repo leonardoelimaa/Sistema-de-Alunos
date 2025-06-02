@@ -78,28 +78,10 @@ int login_professor () {
 
 //função que irá calcular a média
 void calcular_media(int i) {
-
-
-     //calculando a média com base na quantidade de provas que foram aplicadas
     if (alunos[i].p1 >= 0 && alunos[i].p2 >= 0 && alunos[i].p3 >= 0) {
-
-        alunos[i].media = (alunos[i].p1 + alunos[i].p2 + alunos[i].p3) / 3; //se todas já foram aplicadas calcula a média
-
-    } else if (alunos[i].p1 < 0) {       //checando se a p1 foi aplicada, se não foi então o professor ainda não aplicou nenhuma prova
-
-        alunos[i].media = -1;         //definindo a média com um valor arbitrário de -1, mas ela não será exibida
-    
-    } else if (alunos[i].p2 < 0) {          // checando se a p2 foi aplicada, se não tiver sido aplicada, automaticamente a p3 também não foi
-    
-        alunos[i].media = alunos[i].p1;  // a média do alunos[i] será apenas a nota da primeira prova 
-
-    } else {                          // se a p2 foi aplicada então a única não aplicada foi a p3
-
-        alunos[i].media = (alunos[i].p1 + alunos[i].p2) / 2;  // a média será calculada apenas pelas duas primeiras notas
+        alunos[i].media = (alunos[i].notas[0] + alunos[i].notas[1] + alunos[i].notas[2]) / 3;
     }
-
 }
-
 
 //função de classificação 
 void classificacao(int i) {
@@ -416,7 +398,7 @@ void relatorio() {
     
     printf("---- Relatorio da turma ----\n\n");
     
-    for (int i = 0; i < MAX_ALUNOS; i++) {
+    for (int i = 0; i < totalAlunos; i++) {
         if (alunos[i].matricula != 0) {
             printf("Aluno: %s | Media: %lf | Status: %s", alunos[i].nome, alunos[i].media, alunos[i].status);
         }
@@ -430,12 +412,6 @@ void relatorio() {
 
     printf("\nTotal de aprovados: %d\n", aprovados);
     printf("Total de reprovados: %d\n", reprovados);
-}
-
-void zerarMatriculas() {
-    for (int i = 0; i < MAX_ALUNOS; i++) {
-        alunos[i].matricula = 0;
-    }
 }
 
 void boletimCSV() {
@@ -452,9 +428,9 @@ void boletimCSV() {
 
     fprintf(arquivo, "Nome,Prova1,Prova2,Prova3,Media,Status\n"); // CSV eh uma tabela, separa por virgula sem espaco!
 
-    for (int i = 0; i < MAX_ALUNOS; i++) {
+    for (int i = 0; i < totalAlunos; i++) {
         if (alunos[i].matricula != 0) {
-            fprintf(arquivo, "%s,%.2lf,%.2lf,%.2lf,%.2lf,%s\n", alunos[i].nome, alunos[i].p1, alunos[i].p2, alunos[i].p3, alunos[i].media, alunos[i].status);
+            fprintf(arquivo, "%s,%.2lf,%.2lf,%.2lf,%.2lf,%s\n", alunos[i].nome, alunos[i].notas[0], alunos[i].notas[1], alunos[i].notas[2], alunos[i].media, alunos[i].status);
         }
     }
 
