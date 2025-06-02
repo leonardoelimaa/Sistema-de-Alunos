@@ -23,9 +23,6 @@ typedef struct {
     int   matricula;
     char  curso[MAX_CURSO];
     char  observacoes[MAX_OBS];
-    float p1;
-    float p2;
-    float p3;
     float media;
     float notas[MAX_NOTAS]; //experimental
     char status[10];
