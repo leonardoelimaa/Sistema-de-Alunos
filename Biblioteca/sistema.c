@@ -24,6 +24,7 @@ typedef struct {
     float p3;
     float media;
     float notas[MAX_NOTAS]; //experimental
+    char status[10];
 } Aluno;
 
 //definindo um array de structs chamado "alunos", com base no tipo de estrutura "Aluno"
@@ -104,7 +105,6 @@ void calcular_media(int i) {
 
      //calculando a média com base na quantidade de provas que foram aplicadas
     if (alunos[i].p1 >= 0 && alunos[i].p2 >= 0 && alunos[i].p3 >= 0) {
-
 
         alunos[i].media = (alunos[i].p1 + alunos[i].p2 + alunos[i].p3) / 3; //se todas já foram aplicadas calcula a média
 
@@ -203,16 +203,12 @@ void exibir_notas(int i) {
 }
 
 //função de classificação (incompleta)
-void classificacao() {
-    char usuario_aluno[40];
-    float media = 0;
-
-    if (media >= 6) {
-        printf("O aluno %s, com %.2f de média, foi aprovado!", usuario_aluno, media);
+void classificacao(int i) {
+    if (alunos[i].media >= 6) {
+        strcpy(alunos[i].status, "Aprovado");
     } else {
-        printf("O aluno %s, com %.2f de média, foi reprovado.", usuario_aluno, media);
+        strcpy(alunos[i].status, "Reprovado");
     }
-
 }
 
 //funçaõ que remove o \n, caracter que pode cabar sendo armazenado e lido de forma errônea por outros trecho do código
@@ -484,6 +480,7 @@ void cadastro_notas() {
                 limparBuffer();
             }
             calcular_media(pos);
+            classificacao(pos);
         }
     }
 
@@ -504,6 +501,7 @@ void cadastro_notas() {
             printf("Prova 2: %.2f\n", alunos[pos].notas[1]);
             printf("Prova 3: %.2f\n\n", alunos[pos].notas[2]);
             printf("Media: %.2f\n\n", alunos[pos].media);
+            printf("Status: %s\n", alunos[pos].status);
         }
     }
 
