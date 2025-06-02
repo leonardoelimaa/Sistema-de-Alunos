@@ -509,3 +509,31 @@ void cadastro_notas() {
         voltarAoMenu();
 
 }
+
+void relatorio() {
+    int aprovados = 0;
+    int reprovados = 0;
+    
+    printf("---- Relatorio da turma ----\n\n");
+    
+    for (int i = 0; i < MAX_ALUNOS; i++) {
+        if (alunos[i].matricula != 0) {
+            printf("Aluno: %s | Media: %lf | Status: %s", alunos[i].nome, alunos[i].media, alunos[i].status);
+        }
+        
+        if (strcmp(alunos[i].status, "Aprovado") == 0) {
+            aprovados++;
+        } else if (strcmp(alunos[i].status, "Reprovado") == 0) {
+            reprovados++;
+        }
+    }
+
+    printf("\nTotal de aprovados: %d\n", aprovados);
+    printf("Total de reprovados: %d\n", reprovados);
+}
+
+void zerarMatriculas() {
+    for (int i = 0; i < MAX_ALUNOS; i++) {
+        alunos[i].matricula = 0;
+    }
+}

@@ -6,7 +6,8 @@
 
 int main () {
     system("cls");
-    
+    zerarMatriculas();
+
     int retorno_acesso = tela_de_inicio(); // Atualmente retornando 2 
     int retorno_menu; 
 
