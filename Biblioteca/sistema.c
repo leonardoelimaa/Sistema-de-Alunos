@@ -435,6 +435,7 @@ void menu() {
     printf("4. Editar aluno\n");
     printf("5. Remover aluno\n");
     printf("6. Cadastro de notas\n");
+    printf("7. Relatorio e Boletim\n");
     printf("0. Sair\n");
     printf("Escolha uma opcao: ");
 }
@@ -536,4 +537,44 @@ void zerarMatriculas() {
     for (int i = 0; i < MAX_ALUNOS; i++) {
         alunos[i].matricula = 0;
     }
+}
+
+void boletimCSV() {
+    int aprovados = 0;
+    int reprovados = 0;
+
+    FILE *arquivo;
+    arquivo = fopen("relatorio.csv", "w");
+
+    if (arquivo == NULL) {
+        printf("ERRO: Nao foi possivel carregar o boletim, tente novamente!");
+        return;
+    }
+
+    fprintf(arquivo, "Nome,Prova1,Prova2,Prova3,Media,Status\n"); // CSV eh uma tabela, separa por virgula sem espaco!
+
+    for (int i = 0; i < MAX_ALUNOS; i++) {
+        if (alunos[i].matricula != 0) {
+            fprintf(arquivo, "%s,%.2lf,%.2lf,%.2lf,%.2lf,%s\n", alunos[i].nome, alunos[i].p1, alunos[i].p2, alunos[i].p3, alunos[i].media, alunos[i].status);
+        }
+    }
+
+    fclose(arquivo);
+}
+
+void relatorioBoletim() {
+    int opcao;
+    printf("\n--- Relatorio e Boletim ---\n");
+    printf("1. Exibir relatorio da turma\n");
+    printf("2. Criar uma tabela boletim do relatorio da turma\n");
+    printf("0. Voltar\n");
+    scanf("%d", &opcao);
+    limparBuffer();
+
+    if (opcao == 1) {
+        relatorio();
+    } else if (opcao == 2) {
+        boletimCSV();
+    } else if (opcao == 0)
+        voltarAoMenu();
 }
