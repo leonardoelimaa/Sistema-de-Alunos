@@ -15,8 +15,6 @@ char acessos_professor_cadastrados [5][2][30] = {
 char usuario_professor[30];
 char senha_professor[30];
 
-
-
 // Funcoes: 
 
 //função responsável pela tela de início do programa 
@@ -51,7 +49,7 @@ int login_professor () {
     printf("Para conectar-se ao sistema, insira seu nome de usuario e senha, respectivamente, a seguir:\n\n");
 
     while(1) {
-
+        int opcao;
         char tentativa_login[2][30];    //essa variável será usada para testar se as entradas batem com os professores cadastrados
 
         printf("Nome de usuario: "); scanf("%s", tentativa_login[0]);
@@ -67,7 +65,14 @@ int login_professor () {
                 return 1; // Na main, o retorno de 1 libera o usuario
             } 
         } 
-        printf("Nome de usuario/Senha invalidos! Tente novamente!!! \n\n");
+        printf("Nome de usuario/Senha invalidos!\n");
+        printf("Deseja tentar novamente? (1. Sim / 0. Nao)\n");
+        scanf("%d", &opcao);
+
+        if (opcao == 0) {
+            printf("Saindo do sistema...");
+            return 2; // Na main, o retorno de 2 sai do sistema
+        }
     }
 }
 
