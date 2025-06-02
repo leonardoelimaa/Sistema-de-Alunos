@@ -21,5 +21,7 @@ void voltarAoMenu();
 void cadastro_notas();
 void relatorio();
 void zerarMatriculas();
+void boletimCSV();
+void relatorioBoletim();
 
 #endif
