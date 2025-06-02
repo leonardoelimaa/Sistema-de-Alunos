@@ -95,86 +95,8 @@ void calcular_media(int i) {
 
 }
 
-void exibir_notas(int i) {
 
-      /* -- A variável provas_aplicadas vai contar a quantidade de provas que já foram aplicadas até o momento
-       -- Se uma prova ainda não foi aplicada, o professor deve atribuir uma nota negativa à variável p(1, 2 ou 3)
-       -- Logicamente, se uma prova ainda não foi aplicada, a prova seguinte também não. Um professor não vai aplicar a terceira prova sem antes
-    aplicar a segunda
-       -- Portanto, p1 = -1, p2 =10, p3 = 4 é um exemplo de sequencia inválida de notas
-    */
-
-    int provas_aplicadas = 0;  //OBS: como a quantidade de provas aplicadas é igual para todos os alunos ela pode ser escrita como uma variavel global, se isso for conveniente
-
-
-    //realizando a mesma checagem da função 
-    if (alunos[i].p1 >= 0 && alunos[i].p2 >= 0 && alunos[i].p3 >= 0) {
-
-        provas_aplicadas = 3;    //foram aplicadas as 3 provas
-
-    }else if (alunos[i].p1 < 0) {       
-
-        provas_aplicadas =  0;   //nenhuma prova foi aplicada 
-
-    }else if (alunos[i].p2 < 0) {           
-    
-        provas_aplicadas = 1;   // apenas uma prova foi aplicada
-
-    } else {                         
-        provas_aplicadas = 2;   //foram aplicadas 2 provas                             
-    }
-
-    //mensagem ao entrar na página de consulta das notas
-    printf("\n\t----- Avaliação do aluno %s -----\n\n", alunos[i].nome); 
-
-    //checando quantas provas foram feitas para exibir as médias
-    switch(provas_aplicadas) {
-
-        case 3:  //se as três provas foram aplicadas
-
-        printf("Primeira prova: %.2f\n", alunos[i].p1);
-        printf("Segunda prova:  %.2f\n", alunos[i].p2);
-        printf("Terceira prova: %.2f\n", alunos[i].p3);
-        printf("\nMédia final:    %.2f\n", alunos[i].media);
-
-        break;
-
-        case 2: //se apenas duas foram aplicadas
-        
-        printf("Primeira prova: %.2f\n", alunos[i].p1);
-        printf("Segunda prova:  %.2f\n", alunos[i].p2);
-        printf("Terceira prova: Não aplicada\n");
-        printf("\nMédia parcial:    %.2f\n", alunos[i].media);
-
-        break;
-
-        case 1: //se apenas uma foi aplicada
-        
-        printf("Primeira prova: %.2f\n", alunos[i].p1);
-        printf("Segunda prova:  Não aplicada\n");
-        printf("Terceira prova: Não aplicada\n");
-        printf("\nMédia parcial:    %.2f\n", alunos[i].media);
-
-        break;
-
-        case 0: //se nenhuma prova foi aplicada ainda
-
-        printf("Nenhuma prova foi aplicada ainda\n");
-        printf("\nMédia parcial será disponibilizada após a aplicação da primeira prova\n");
-
-        break;
-
-        default:
-
-        //se a quantidade de provas não for um número entre 0 e 3, há algum problema de lógica
-        //essa opção provavelmente será removida na versão final 
-        printf("Um erro foi detectado"); 
-
-    }
-
-}
-
-//função de classificação (incompleta)
+//função de classificação 
 void classificacao(int i) {
     if (alunos[i].media >= 6) {
         strcpy(alunos[i].status, "Aprovado");

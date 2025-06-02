@@ -1,4 +1,0 @@
-	NOVA VERSÃO DE 27/05/2025 - 16:48
-
-
-- Separação da função media em calcular_media e exibir_media, no arquivo sistema.c 
