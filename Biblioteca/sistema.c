@@ -29,6 +29,7 @@ int tela_de_inicio() {
         printf("*Digite 1 para conectar-se ao sistema\n");
         printf("*Digite 2 para sair do sistema\n\n");
 
+        printf("Escolha uma opcao: ");
         scanf(" %c", &acesso);
 
         if (acesso == '1') {
@@ -41,6 +42,15 @@ int tela_de_inicio() {
     }
 
     return 0; // retorno padrão, mas não é usado
+}
+
+//função para limpar a tela do termial, chamada quando entra no programa, ou quando retorna ao menu principal
+void limpa_tela() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
 }
 
 //função que solicita e verifica o login do professor
@@ -70,7 +80,7 @@ int login_professor () {
         scanf("%d", &opcao);
 
         if (opcao == 0) {
-            printf("Saindo do sistema...");
+            printf("Saindo do sistema...\n");
             return 2; // Na main, o retorno de 2 sai do sistema
         }
     }
@@ -327,6 +337,7 @@ void voltarAoMenu() {
     int opcao;
     scanf("%d", &opcao);
     limparBuffer();
+    limpa_tela();
     
     if (opcao == 0) {
         printf("Saindo do sistema...\n");

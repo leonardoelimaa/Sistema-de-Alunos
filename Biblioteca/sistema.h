@@ -31,6 +31,7 @@ typedef struct {
 // ==== PROTOTIPOS DAS FUNCOES ====
 
 int tela_de_inicio();
+void limpa_tela();
 int login_professor();
 int menu_iniciar();
 void media(int i);

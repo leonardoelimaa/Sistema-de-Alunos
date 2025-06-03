@@ -2,7 +2,7 @@
 
 int main () {
     carregarDadosDoArquivo();
-    system("cls");
+    limpa_tela();
 
     int retorno_acesso = tela_de_inicio(); // Atualmente retornando 2 
     int retorno_menu; 
@@ -12,7 +12,7 @@ int main () {
             retorno_menu = login_professor();
             break;
         case 2:
-            printf("Saindo do sistema...");
+            printf("Saindo do sistema...\n");
             return 0;
             break;
     }
@@ -20,6 +20,7 @@ int main () {
     if (retorno_menu == 1) {
         // Inicializa o gerador de números aleatórios
     srand(time(NULL));
+    limpa_tela();
     
     int opcao;
     
