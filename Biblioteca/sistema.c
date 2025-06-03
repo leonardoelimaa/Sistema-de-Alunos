@@ -175,10 +175,14 @@ void cadastrarAluno() {
     fgets(novoAluno.observacoes, MAX_OBS, stdin);
     novoAluno.observacoes[strcspn(novoAluno.observacoes, "\n")] = '\0';
     
+    //Inicializando a primeira nota como -1 para denotar que ainda não foram registradas as notas do aluno
+    novoAluno.notas[0] = -1;
+
     alunos[totalAlunos] = novoAluno;
     totalAlunos++;
     
     printf("Aluno cadastrado com sucesso!\n");
+    
 }
 
 //função que lista todos os alunos
@@ -386,9 +390,11 @@ void cadastro_notas() {
         limparBuffer();
 
         int pos = buscarPorMatricula(matricula);
-        if (pos == -1) {
-            printf("Aluno nao encontrado.\n");
-        } else {
+
+        if (pos == -1) printf("Aluno nao encontrado.\n");
+         
+        //checando se as notas do aluno já foram cadastradas para que sejam exibidas
+        else if(alunos[pos].notas[0] != -1){
             printf("\nAluno encontrado: %s\n", alunos[pos].nome);
 
             printf("\n--- Notas do aluno ---\n");
@@ -397,6 +403,11 @@ void cadastro_notas() {
             printf("Prova 3: %.2f\n\n", alunos[pos].notas[2]);
             printf("Media: %.2f\n\n", alunos[pos].media);
             printf("Status: %s\n", alunos[pos].status);
+
+        }else {
+
+            printf("\n--- Notas do aluno ---\n");
+            printf("\nAs notas deste aluno ainda nao foram cadastradas\n");
         }
     }
 
