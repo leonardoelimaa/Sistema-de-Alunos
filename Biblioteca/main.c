@@ -18,8 +18,10 @@ int main () {
     }
 
     if (retorno_menu == 1) {
-        // Inicializa o gerador de números aleatórios
+    // Inicializa o gerador de números aleatórios
     srand(time(NULL));
+
+    //limpa a tela do terminal
     limpa_tela();
     
     int opcao;

@@ -1,10 +1,12 @@
-#include "sistema.h"  //cabeçalho da biblioteca do projeto
+// ==== DEFINICOES: ====
 
-Aluno alunos[MAX_ALUNOS]; // Array de alunos baseado no struct criado
+#include "sistema.h"            //cabeçalho da biblioteca do projeto
 
-int totalAlunos = 0; //número inicial de alunos
+Aluno alunos[MAX_ALUNOS];     // Array de alunos baseado no struct criado
 
-//defindo uma matriz multidimensional que armazena as credenciais dos professores
+int totalAlunos = 0;        //número inicial de alunos
+
+//Defindo uma matriz multidimensional que armazena as credenciais dos professores
 char acessos_professor_cadastrados [5][2][30] = {
     {"leonardolima", "senhaleonardo"},
     {"pedrobrito", "senhapedro"},
@@ -12,12 +14,11 @@ char acessos_professor_cadastrados [5][2][30] = {
     {"joaopaulo", "senhajoao"},
     {"lucassantana", "senhalucas"}
 };
-char usuario_professor[30];
-char senha_professor[30];
 
-// Funcoes: 
 
-//função responsável pela tela de início do programa 
+// ==== FUNCOES: ====
+
+//Função responsável pela tela de início do programa 
 int tela_de_inicio() {
     
     char acesso = '0';
@@ -44,16 +45,16 @@ int tela_de_inicio() {
     return 0; // retorno padrão, mas não é usado
 }
 
-//função para limpar a tela do termial, chamada quando entra no programa, ou quando retorna ao menu principal
+//Função para limpar a tela do termial, chamada quando entra no programa, ou quando retorna ao menu principal
 void limpa_tela() {
     #ifdef _WIN32
-        system("cls");
+        system("cls");      //opcao para sistemas windows
     #else
-        system("clear");
+        system("clear");   //opcao para sistemas linux 
     #endif
 }
 
-//função que solicita e verifica o login do professor
+//Função que solicita e verifica o login do professor
 int login_professor () {
 
     printf("\nPara conectar-se ao sistema, insira seu nome de usuario e senha, respectivamente, a seguir:\n\n");
@@ -86,14 +87,14 @@ int login_professor () {
     }
 }
 
-//função que irá calcular a média
+//Função que irá calcular a média
 void calcular_media(int i) {
     if (alunos[i].notas[0] >= 0 && alunos[i].notas[1] >= 0 && alunos[i].notas[2] >= 0) {
         alunos[i].media = (alunos[i].notas[0] + alunos[i].notas[1] + alunos[i].notas[2]) / 3.0;
     }
 }
 
-//função de classificação 
+//Função de classificação 
 void classificacao(int i) {
     if (alunos[i].media >= 6) {
         strcpy(alunos[i].status, "Aprovado");
@@ -102,7 +103,7 @@ void classificacao(int i) {
     }
 }
 
-//funçaõ que remove o \n, caracter que pode cabar sendo armazenado e lido de forma errônea por outros trecho do código
+//Funçaõ que remove o '\n', caracter que pode cabar sendo armazenado e lido de forma errônea por outros trecho do código
 void limparBuffer() {
     while (getchar() != '\n');
 }
@@ -144,20 +145,19 @@ int gerarMatricula() {
     return matricula;
 }
 
-//função que irá cadastrar o aluno
+//Função que irá cadastrar o aluno
 void cadastrarAluno() {
     if (totalAlunos >= MAX_ALUNOS) {
         printf("Limite de alunos atingido!\n");
         return;
     }
 
-    Aluno novoAluno;
+    Aluno novoAluno;    //variavel temporária do tipo Aluno usada para fazer o cadastro
     
     printf("\n--- Cadastro de Aluno ---\n");
-    
     printf("Nome completo: ");
     fgets(novoAluno.nome, MAX_NOME, stdin);
-    novoAluno.nome[strcspn(novoAluno.nome, "\n")] = '\0';
+    novoAluno.nome[strcspn(novoAluno.nome, "\n")] = '\0';   //substitui o '\n' por '\0'
     
     // Gera matrícula automaticamente
     novoAluno.matricula = gerarMatricula();
@@ -185,7 +185,7 @@ void cadastrarAluno() {
     
 }
 
-//função que lista todos os alunos
+//Função que lista todos os alunos
 void listarAlunos() {
     if (totalAlunos == 0) {
         printf("\nNenhum aluno cadastrado.\n");
@@ -202,7 +202,7 @@ void listarAlunos() {
     }
 }
 
-//função que busca por meio da matrícula
+//Função que busca por meio da matrícula
 int buscarPorMatricula(int matricula) {
     for (int i = 0; i < totalAlunos; i++) {
         if (alunos[i].matricula == matricula) {
@@ -212,7 +212,7 @@ int buscarPorMatricula(int matricula) {
     return -1;
 }
 
-//função de busca completa, por matrícula e por nome
+//Função de busca completa, por matrícula e por nome
 void buscarAluno() {
     int opcao;
     printf("\n--- Buscar Aluno ---\n");
@@ -267,7 +267,7 @@ void buscarAluno() {
     else printf("Opcao invalida.\n");
 }
 
-//função que edita os dados dos alunos depois de já criados
+//Função que edita os dados dos alunos depois de já criados
 void editarAluno() {
     int matricula;
     printf("\n--- Editar Aluno ---\n");
@@ -297,7 +297,7 @@ void editarAluno() {
     printf("Aluno atualizado com sucesso!\n");
 }
 
-//função que remove o registro de um aluno
+//Função que remove o registro de um aluno
 void removerAluno() {
     int matricula;
     printf("\n--- Remover Aluno ---\n");
@@ -322,7 +322,7 @@ void removerAluno() {
     printf("Aluno removido com sucesso!\n");
 }
 
-//função de menu
+//Função de menu
 void menu() {
     printf("\n=== SISTEMA DE GESTAO DE ALUNOS ===\n");
     printf("1. Cadastrar aluno\n");
@@ -336,7 +336,7 @@ void menu() {
     printf("Escolha uma opcao: ");
 }
 
-//função para perguntar se deseja voltar ao menu
+//Função para perguntar se deseja voltar ao menu
 void voltarAoMenu() {
     printf("\nDeseja voltar ao menu principal? (1 - Sim / 0 - Nao): ");
     int opcao;
@@ -351,7 +351,7 @@ void voltarAoMenu() {
     }
 }
 
-//função que cadastra as notas
+//Função que cadastra as notas
 void cadastro_notas() {
     int opcao;
     printf("\n--- Cadastro de notas ---\n");
@@ -412,11 +412,11 @@ void cadastro_notas() {
         }
     }
 
-    if (opcao == 0)
-        return;
+    if (opcao == 0) return;
 
 }
 
+//Função que imprime um relatório acerca dos aprovados e reprovados da turma
 void relatorio() {
     int aprovados = 0;
     int reprovados = 0;
@@ -424,24 +424,22 @@ void relatorio() {
     printf("---- Relatorio da turma ----\n\n");
     
     for (int i = 0; i < totalAlunos; i++) {
-        if (alunos[i].matricula != 0) {
+
+        if (alunos[i].matricula != 0) 
             printf("Aluno: %s | Media: %lf | Status: %s", alunos[i].nome, alunos[i].media, alunos[i].status);
-        }
         
-        if (strcmp(alunos[i].status, "Aprovado") == 0) {
-            aprovados++;
-        } else if (strcmp(alunos[i].status, "Reprovado") == 0) {
-            reprovados++;
-        }
+        if (strcmp(alunos[i].status, "Aprovado") == 0) aprovados++;
+
+        else if (strcmp(alunos[i].status, "Reprovado") == 0) reprovados++;
+        
     }
 
     printf("\nTotal de aprovados: %d\n", aprovados);
     printf("Total de reprovados: %d\n", reprovados);
 }
 
+//Função que gera um arquivo contendo o relatório
 void boletimCSV() {
-    int aprovados = 0;
-    int reprovados = 0;
 
     FILE *arquivo;
     arquivo = fopen("relatorio.csv", "w");
@@ -451,18 +449,20 @@ void boletimCSV() {
         return;
     }
 
-    fprintf(arquivo, "Nome,Prova1,Prova2,Prova3,Media,Status\n"); // CSV eh uma tabela, separa por virgula sem espaco!
+    fprintf(arquivo, "Nome,Prova1,Prova2,Prova3,Media,Status\n"); // CSV eh uma tabela, separada por virgula e sem espaco!
 
     for (int i = 0; i < totalAlunos; i++) {
-        if (alunos[i].matricula != 0) {
-            fprintf(arquivo, "%s,%.2lf,%.2lf,%.2lf,%.2lf,%s\n", alunos[i].nome, alunos[i].notas[0], alunos[i].notas[1], alunos[i].notas[2], alunos[i].media, alunos[i].status);
-        }
+
+        if (alunos[i].matricula != 0)
+        fprintf(arquivo, "%s,%.2lf,%.2lf,%.2lf,%.2lf,%s\n", alunos[i].nome, alunos[i].notas[0], alunos[i].notas[1], alunos[i].notas[2], alunos[i].media, alunos[i].status);
+
     }
 
     fclose(arquivo);
     printf("\nBoletim criado com sucesso!");
 }
 
+//Função de submenu para gerar o relatório da turma (chama relatorio() ou boletimCSV() dependendo da opção)
 void relatorioBoletim() {
     int opcao;
     printf("\n--- Relatorio e Boletim ---\n");
@@ -481,6 +481,7 @@ void relatorioBoletim() {
         
 }
 
+//Função para o salvamento dos dados em um arquivo binário
 void salvarDadosEmArquivo() {
     FILE *arquivo = fopen("alunos.bin", "wb"); // abre para escrita binária
     if (arquivo == NULL) {
@@ -495,6 +496,7 @@ void salvarDadosEmArquivo() {
     printf("Dados salvos com sucesso!\n");
 }
 
+//Função para a leitura(e cópia em memória) dos dados em um arquivo binário
 void carregarDadosDoArquivo() {
     FILE *arquivo = fopen("alunos.bin", "rb"); // abre para leitura binária
     if (arquivo == NULL) {
