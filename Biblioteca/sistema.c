@@ -188,7 +188,7 @@ void cadastrarAluno() {
 //função que lista todos os alunos
 void listarAlunos() {
     if (totalAlunos == 0) {
-        printf("Nenhum aluno cadastrado.\n");
+        printf("\nNenhum aluno cadastrado.\n");
         return;
     }
     
@@ -231,7 +231,7 @@ void buscarAluno() {
         
         int pos = buscarPorMatricula(matricula);
         if (pos == -1) {
-            printf("Aluno nao encontrado.\n");
+            printf("\nAluno nao encontrado.\n");
         } else {
             printf("\nAluno encontrado:\n");
             printf("Nome: %s\n", alunos[pos].nome);
@@ -260,7 +260,7 @@ void buscarAluno() {
         }
         
         if (encontrados == 0) {
-            printf("Nenhum aluno encontrado com esse nome.\n");
+            printf("\nNenhum aluno encontrado com esse nome.\n");
         }
     } else if (opcao == 0) return;
         
@@ -311,7 +311,7 @@ void removerAluno() {
         return;
     }
     
-    printf("Removendo aluno: %s\n", alunos[pos].nome);
+    printf("\nRemovendo aluno: %s\n", alunos[pos].nome);
     
     // sobe os alunos uma posicao quando algum e excluido
     for (int i = pos; i < totalAlunos - 1; i++) {
@@ -345,6 +345,7 @@ void voltarAoMenu() {
     limpa_tela();
     
     if (opcao == 0) {
+        salvarDadosEmArquivo();
         printf("Saindo do sistema...\n");
         exit(0);
     }
@@ -497,7 +498,7 @@ void salvarDadosEmArquivo() {
 void carregarDadosDoArquivo() {
     FILE *arquivo = fopen("alunos.bin", "rb"); // abre para leitura binária
     if (arquivo == NULL) {
-        printf("Nenhum dado anterior encontrado.\n");
+        printf("\nNenhum dado anterior encontrado.\n");
         return;
     }
 
