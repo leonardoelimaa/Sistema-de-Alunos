@@ -1,6 +1,7 @@
 #include "sistema.h"
 
 int main () {
+    carregarDadosDoArquivo();
     system("cls");
 
     int retorno_acesso = tela_de_inicio(); // Atualmente retornando 2 
@@ -64,6 +65,8 @@ int main () {
                 voltarAoMenu();
         }
     } while (opcao != 0);
+    
+    salvarDadosEmArquivo();
     
     return 0;
     }
