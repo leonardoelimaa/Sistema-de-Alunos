@@ -14,7 +14,7 @@
 #define MAX_NOME 100    //constante do número máximo de caracteres de um nome
 #define MAX_CURSO 50   //constante do número máximo de caracteres do nome do curso
 #define MAX_OBS 200   //costante que define o tamanho máximo das observações
-#define MAX_NOTAS 3  //constante que define o número de notas a serem cadastradas(experimental)
+#define MAX_NOTAS 3  //constante que define o número de notas a serem cadastradas
 
 // ==== STRUCT ====
 
@@ -24,7 +24,7 @@ typedef struct {
     char  curso[MAX_CURSO];
     char  observacoes[MAX_OBS];
     float media;
-    float notas[MAX_NOTAS]; //experimental
+    float notas[MAX_NOTAS];
     char status[10];
 } Aluno;
 

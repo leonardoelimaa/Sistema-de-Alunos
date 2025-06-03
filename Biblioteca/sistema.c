@@ -79,7 +79,7 @@ int login_professor () {
 //função que irá calcular a média
 void calcular_media(int i) {
     if (alunos[i].notas[0] >= 0 && alunos[i].notas[1] >= 0 && alunos[i].notas[2] >= 0) {
-        alunos[i].media = (alunos[i].notas[0] + alunos[i].notas[1] + alunos[i].notas[2]) / 3;
+        alunos[i].media = (alunos[i].notas[0] + alunos[i].notas[1] + alunos[i].notas[2]) / 3.0;
     }
 }
 
