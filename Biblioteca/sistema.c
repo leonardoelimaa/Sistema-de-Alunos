@@ -56,7 +56,7 @@ void limpa_tela() {
 //função que solicita e verifica o login do professor
 int login_professor () {
 
-    printf("Para conectar-se ao sistema, insira seu nome de usuario e senha, respectivamente, a seguir:\n\n");
+    printf("\nPara conectar-se ao sistema, insira seu nome de usuario e senha, respectivamente, a seguir:\n\n");
 
     while(1) {
         int opcao;
@@ -214,6 +214,7 @@ void buscarAluno() {
     printf("\n--- Buscar Aluno ---\n");
     printf("1. Por matricula\n");
     printf("2. Por nome\n");
+    printf("0. Voltar\n");
     printf("Escolha uma opcao: ");
     scanf("%d", &opcao);
     limparBuffer();
@@ -257,9 +258,9 @@ void buscarAluno() {
         if (encontrados == 0) {
             printf("Nenhum aluno encontrado com esse nome.\n");
         }
-    } else {
-        printf("Opcao invalida.\n");
-    }
+    } else if (opcao == 0) return;
+        
+    else printf("Opcao invalida.\n");
 }
 
 //função que edita os dados dos alunos depois de já criados
@@ -352,6 +353,7 @@ void cadastro_notas() {
     printf("1. Cadastrar notas\n");
     printf("2. Ver notas cadastradas\n");
     printf("0. Voltar\n");
+    printf("Escolha uma opcao: ");
     scanf("%d", &opcao);
     limparBuffer();
 
@@ -399,7 +401,7 @@ void cadastro_notas() {
     }
 
     if (opcao == 0)
-        voltarAoMenu();
+        return;
 
 }
 
@@ -455,15 +457,16 @@ void relatorioBoletim() {
     printf("1. Exibir relatorio da turma\n");
     printf("2. Criar uma tabela boletim do relatorio da turma\n");
     printf("0. Voltar\n");
+    printf("Escolha uma opcao: ");
     scanf("%d", &opcao);
     limparBuffer();
 
-    if (opcao == 1) {
-        relatorio();
-    } else if (opcao == 2) {
-        boletimCSV();
-    } else if (opcao == 0)
-        voltarAoMenu();
+    if (opcao == 1) relatorio();
+        
+    else if (opcao == 2) boletimCSV();
+        
+    else if (opcao == 0) return;
+        
 }
 
 void salvarDadosEmArquivo() {
