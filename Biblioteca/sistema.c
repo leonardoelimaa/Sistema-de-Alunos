@@ -422,7 +422,7 @@ void boletimCSV() {
     arquivo = fopen("relatorio.csv", "w");
 
     if (arquivo == NULL) {
-        printf("ERRO: Nao foi possivel carregar o boletim, tente novamente!");
+        printf("\nERRO: Nao foi possivel carregar o boletim, tente novamente!");
         return;
     }
 
@@ -435,6 +435,7 @@ void boletimCSV() {
     }
 
     fclose(arquivo);
+    printf("\nBoletim criado com sucesso!");
 }
 
 void relatorioBoletim() {
