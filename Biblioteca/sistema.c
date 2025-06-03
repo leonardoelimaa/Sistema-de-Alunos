@@ -453,3 +453,31 @@ void relatorioBoletim() {
     } else if (opcao == 0)
         voltarAoMenu();
 }
+
+void salvarDadosEmArquivo() {
+    FILE *arquivo = fopen("alunos.bin", "wb"); // abre para escrita binária
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para salvar os dados.\n");
+        return;
+    }
+
+    fwrite(&totalAlunos, sizeof(int), 1, arquivo); // salva o total de alunos no arquivo binario
+    fwrite(alunos, sizeof(Aluno), totalAlunos, arquivo); // salva o array de alunos no arquivo binario 
+
+    fclose(arquivo);
+    printf("Dados salvos com sucesso!\n");
+}
+
+void carregarDadosDoArquivo() {
+    FILE *arquivo = fopen("alunos.bin", "rb"); // abre para leitura binária
+    if (arquivo == NULL) {
+        printf("Nenhum dado anterior encontrado.\n");
+        return;
+    }
+
+    fread(&totalAlunos, sizeof(int), 1, arquivo); // lê o total de alunos no arquivo e faz copia local
+    fread(alunos, sizeof(Aluno), totalAlunos, arquivo); // lê os dados dos alunos e salva em copia local
+
+    fclose(arquivo);
+    printf("Dados carregados com sucesso!\n");
+}
