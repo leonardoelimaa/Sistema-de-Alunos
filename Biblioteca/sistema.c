@@ -25,7 +25,7 @@ int tela_de_inicio() {
 
     printf ("\n----- Bem-vindo ao EduC, a maior plataforma de gestao de alunos do Brasil! -----\n\n");
     
-    while (acesso != '1' && acesso != '2') {   //o loop se repete até que algum dos comandos básicos seja digitado pelo usuário
+    while (acesso != '1' && acesso != '2') {   //o loop se repete até que algum dos comandos básicos seja digitado
         printf("Para acessar nosso sistema: \n\n");
         printf("*Digite 1 para conectar-se ao sistema\n");
         printf("*Digite 2 para sair do sistema\n\n");
@@ -61,15 +61,15 @@ int login_professor () {
 
     while(1) {
         int opcao;
-        char tentativa_login[2][30];    //essa variável será usada para testar se as entradas batem com os professores cadastrados
+        char tentativa_login[2][30]; // variável usada para comparar as entradas com os professores cadastrados
 
         printf("Nome de usuario: "); scanf("%s", tentativa_login[0]);
         printf("Senha: "); scanf("%s", tentativa_login[1]);
 
-        //essa operação identifica o números de professores cadastrados
+        // essa operação identifica o números de professores cadastrados
         int numero_de_usuarios = sizeof(acessos_professor_cadastrados) / sizeof(acessos_professor_cadastrados[0]);
 
-        //checa um por um se a tentativa de login bate com algum professor cadastrado
+        // checa um por um se a tentativa de login bate com algum professor cadastrado
         for (int i = 0; i < numero_de_usuarios; i++) {
             if (strcmp(tentativa_login[0], acessos_professor_cadastrados[i][0]) == 0 && 
                 strcmp(tentativa_login[1], acessos_professor_cadastrados[i][1]) == 0) {
@@ -182,7 +182,6 @@ void cadastrarAluno() {
     totalAlunos++;
     
     printf("Aluno cadastrado com sucesso!\n");
-    
 }
 
 //Função que lista todos os alunos
