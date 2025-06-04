@@ -270,6 +270,8 @@ void buscarAluno() {
 //Função que edita os dados dos alunos depois de já criados
 void editarAluno() {
     int matricula;
+    int opcao;
+
     printf("\n--- Editar Aluno ---\n");
     printf("Digite a matricula do aluno: ");
     scanf("%d", &matricula);
@@ -282,19 +284,55 @@ void editarAluno() {
     }
     
     printf("\nEditando aluno: %s\n", alunos[pos].nome);
-    printf("Novo nome (atual: %s): ", alunos[pos].nome);
-    fgets(alunos[pos].nome, MAX_NOME, stdin);
-    alunos[pos].nome[strcspn(alunos[pos].nome, "\n")] = '\0';
+    printf("\n-- O que deseja editar ? --\n");
+
+
+    printf("1. Nome\n");
+    printf("2. Curso\n");
+    printf("3. Observacoes\n");
+    printf("0. Voltar\n");
+    printf("Escolha uma opcao: ");
     
-    printf("Novo curso (atual: %s): ", alunos[pos].curso);
-    fgets(alunos[pos].curso, MAX_CURSO, stdin);
-    alunos[pos].curso[strcspn(alunos[pos].curso, "\n")] = '\0';
-    
-    printf("Novas observacoes (atual: %s): ", alunos[pos].observacoes);
-    fgets(alunos[pos].observacoes, MAX_OBS, stdin);
-    alunos[pos].observacoes[strcspn(alunos[pos].observacoes, "\n")] = '\0';
-    
-    printf("Aluno atualizado com sucesso!\n");
+    do {
+
+        scanf("%d", &opcao);
+        limparBuffer();
+
+        switch(opcao) {   
+
+            case 1: //editando apenas o nome do aluno
+
+                printf("\nNovo nome (atual: %s): ", alunos[pos].nome);
+                fgets(alunos[pos].nome, MAX_NOME, stdin);
+                alunos[pos].nome[strcspn(alunos[pos].nome, "\n")] = '\0';
+                break;
+        
+            case 2: //editando apenas o curso do aluno
+
+                printf("\nNovo curso (atual: %s): ", alunos[pos].curso);
+                fgets(alunos[pos].curso, MAX_CURSO, stdin);
+                alunos[pos].curso[strcspn(alunos[pos].curso, "\n")] = '\0';
+                break;
+            
+            case 3: //editando apenas as observações
+
+                printf("\nNovas observacoes (atual: %s): ", alunos[pos].observacoes);
+                fgets(alunos[pos].observacoes, MAX_OBS, stdin);
+                alunos[pos].observacoes[strcspn(alunos[pos].observacoes, "\n")] = '\0';
+                break;
+            
+            case 0: //retornando para a main, que ira chamar a função voltarAoMenu()
+
+                return;
+            
+            default:
+
+                printf("\nOpcao invalida, digite novamente:");
+        }
+        
+    }while(opcao > 3 || opcao < 0);
+
+        printf("Aluno atualizado com sucesso!\n");
 }
 
 //Função que remove o registro de um aluno
@@ -384,7 +422,7 @@ void cadastro_notas() {
         }
     }
 
-    if (opcao == 2) {
+    else if (opcao == 2) {
         int matricula;
         printf("Escreva a matricula do aluno que voce quer ver as notas.\n");
         scanf("%d", &matricula);
