@@ -30,28 +30,46 @@ typedef struct {
 
 // ==== PROTOTIPOS DAS FUNCOES ====
 
+//funcoes iniciais//
 int  tela_de_inicio();
-void limpa_tela();
 int  login_professor();
-int  menu_iniciar();
-void media(int i);
-void classificacao(int i);
-void classificacao();
-void limparBuffer();
-int  matriculaExiste(int matricula);
-int  gerarMatricula();
-void cadastrarAluno();
-void listarAlunos();
-int  buscarPorMatricula(int matricula);
-void buscarAluno();
-void editarAluno();
-void removerAluno();
+
+//funcoes de menu//
 void menu();
 void voltarAoMenu();
+
+//funcoes de limpeza//
+void limpa_tela();
+void limparBuffer();
+
+//funcoes de matricula//
+int  matriculaExiste(int matricula);
+int  gerarMatricula();
+int  digitarMatricula();
+
+//funcoes de busca//
+int  buscarPorMatricula(int matricula);
+void buscarAluno();
+
+//funcoes de cadastro//
+void cadastrarAluno();
 void cadastro_notas();
+
+//funcoes gerais de aluno//
+void listarAlunos();
+void editarAluno();
+void removerAluno();
+
+//funcoes de media//
+void media(int i);
+void classificacao(int i);
+
+//funcoes de relatorio//
 void relatorio();
 void boletimCSV();
 void relatorioBoletim();
+
+//funcoes de arquivo//
 void salvarDadosEmArquivo();
 void carregarDadosDoArquivo();
 
