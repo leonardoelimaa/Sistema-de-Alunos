@@ -212,8 +212,23 @@ int buscarPorMatricula(int matricula) {
     return -1;
 }
 
+//Função para padrozinar a entrada do usuário ao digitar a matrícula
+int digitarMatricula() {
+
+    int matricula;
+    printf("Digite a matricula do aluno: ");
+    scanf("%d", &matricula);
+    limparBuffer();
+        
+    int pos = buscarPorMatricula(matricula);
+
+    if (pos == -1) printf("\nAluno nao encontrado.\n");
+
+    return pos;
+}
 //Função de busca completa, por matrícula e por nome
 void buscarAluno() {
+
     int opcao;
     printf("\n--- Buscar Aluno ---\n");
     printf("1. Por matricula\n");
@@ -224,15 +239,10 @@ void buscarAluno() {
     limparBuffer();
     
     if (opcao == 1) {
-        int matricula;
-        printf("Digite a matricula: ");
-        scanf("%d", &matricula);
-        limparBuffer();
         
-        int pos = buscarPorMatricula(matricula);
-        if (pos == -1) {
-            printf("\nAluno nao encontrado.\n");
-        } else {
+        int pos = digitarMatricula(); //usa a funçaõ digitarMatricula() para escrever encontrar a posição
+
+        if (pos != -1) {
             printf("\nAluno encontrado:\n");
             printf("Nome: %s\n", alunos[pos].nome);
             printf("Matricula: %d\n", alunos[pos].matricula);
@@ -269,20 +279,14 @@ void buscarAluno() {
 
 //Função que edita os dados dos alunos depois de já criados
 void editarAluno() {
-    int matricula;
     int opcao;
 
     printf("\n--- Editar Aluno ---\n");
-    printf("Digite a matricula do aluno: ");
-    scanf("%d", &matricula);
-    limparBuffer();
     
-    int pos = buscarPorMatricula(matricula);
-    if (pos == -1) {
-        printf("Aluno nao encontrado.\n");
-        return;
-    }
-    
+    int pos = digitarMatricula();   // usando digitarMatricula para pedir a entrada do usuário
+
+    if (pos == -1) return;        // retorna se nao for encontrada a matricula
+        
     printf("\nEditando aluno: %s\n", alunos[pos].nome);
     printf("\n-- O que deseja editar ? --\n");
 
@@ -295,7 +299,7 @@ void editarAluno() {
     
     do {
 
-        scanf("%d", &opcao);
+        scanf("%d", &opcao); //escolhendo uma opção
         limparBuffer();
 
         switch(opcao) {   
@@ -325,29 +329,24 @@ void editarAluno() {
 
                 return;
             
-            default:
+            default: //se for digitada uma opção invalida imprime essa mensagem na tela
 
                 printf("\nOpcao invalida, digite novamente:");
         }
-        
-    }while(opcao > 3 || opcao < 0);
+
+    }while(opcao > 3 || opcao < 0); // checa se a opção está entre 0 e 3, se não é inválida e recomeça o loop
 
         printf("Aluno atualizado com sucesso!\n");
 }
 
 //Função que remove o registro de um aluno
 void removerAluno() {
-    int matricula;
+   
     printf("\n--- Remover Aluno ---\n");
-    printf("Digite a matricula do aluno: ");
-    scanf("%d", &matricula);
-    limparBuffer();
     
-    int pos = buscarPorMatricula(matricula);
-    if (pos == -1) {
-        printf("Aluno nao encontrado.\n");
-        return;
-    }
+    int pos = digitarMatricula();   // usando digitarMatricula() para pedir a entrada do usuário
+
+    if (pos == -1) return;        // retorna se a matricula não for encontrada
     
     printf("\nRemovendo aluno: %s\n", alunos[pos].nome);
     
@@ -401,15 +400,12 @@ void cadastro_notas() {
     limparBuffer();
 
     if (opcao == 1) {
-        int matricula;
-        printf("Escreva a matricula do aluno que voce ira registrar a nota.\n");
-        scanf("%d", &matricula);
-        limparBuffer();
+        
+        int pos = digitarMatricula(); //usando digitarMatricula para pedir a entrada do usuário
 
-        int pos = buscarPorMatricula(matricula);
-        if (pos == -1) {
-            printf("Aluno nao encontrado.\n");
-        } else {
+        if (pos == -1) return;      // retorna de a matricula não for achada
+            
+        else {
             printf("\nAluno encontrado: %s\n", alunos[pos].nome);
             
             for (int i = 0; i < 3; i++) {
@@ -423,14 +419,10 @@ void cadastro_notas() {
     }
 
     else if (opcao == 2) {
-        int matricula;
-        printf("Escreva a matricula do aluno que voce quer ver as notas.\n");
-        scanf("%d", &matricula);
-        limparBuffer();
+        
+        int pos = digitarMatricula();   // usando digitarMatricula para pedir a entrada do usuário
 
-        int pos = buscarPorMatricula(matricula);
-
-        if (pos == -1) printf("Aluno nao encontrado.\n");
+        if (pos == -1) return;        // retorna de a matricula não for achada
          
         //checando se as notas do aluno já foram cadastradas para que sejam exibidas
         else if(alunos[pos].notas[0] != -1){
