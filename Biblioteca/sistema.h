@@ -61,7 +61,7 @@ void editarAluno();
 void removerAluno();
 
 //funcoes de media//
-void media(int i);
+void calcular_media(int i);
 void classificacao(int i);
 
 //funcoes de relatorio//
