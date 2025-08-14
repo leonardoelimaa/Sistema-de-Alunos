@@ -15,12 +15,9 @@ sistema-gestao-alunos/
 
 │   ├── Makefile     // Arquivo para facilitar os comandos de compilação do código
 
+├── README.md        // Documentação completa do projeto
 
-├── data/
-
-│   ├── README.md        // Documentação completa do projeto
-
-│    └── LICENSE          // Licença GNU GPL v2.0
+└── LICENSE          // Licença GNU GPL v2.0
 
 <h2 style="color:#AF7AC5;"> Instalação e Execução</h2> <p> Siga os passos abaixo para clonar, compilar e executar o sistema no seu computador: </p>
 // Compilar todos os arquivos C
